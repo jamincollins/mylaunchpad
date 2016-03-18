@@ -36,7 +36,7 @@ class OBMenu:
                          file_name="openbox-xdg-menu-cache.xml")
         self.appsmenu = menu.getMenu()
 
-        #update cache in the background
+        # update cache in the background
         t = threading.Thread(target=menu.updateCache())
         t.start()
 
@@ -53,7 +53,7 @@ class OBMenu:
                print(etree.tostring(item, pretty_print=True, encoding='UTF-8'))
            print('</openbox_pipe_menu>\n')
 
-#main
+# main
 menu = OBMenu()
 if len(sys.argv) > 2:
     menu.getMenu(sys.argv[2])
