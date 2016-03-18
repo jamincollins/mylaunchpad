@@ -12,7 +12,7 @@
 #    *You can change the default menu with your favorite xdg-menu like xfce-applications or lxde-aplications
 #    *You can change All with the ID of a specific category
 
-      
+
 import os, sys
 import threading
 from appsmenu import MenuCache
@@ -25,15 +25,15 @@ except:
 
 class OBMenu:
     def __init__(self):
-        
+
         # Get Menu
         menu = MenuCache(AUTO_UPDATE=False, tag="openbox_pipe_menu", cache_dir = "openbox",  file_name = "openbox-xdg-menu-cache.xml")
         self.appsmenu = menu.getMenu()
 
         #update cache in the background
-        t = threading.Thread(target=menu.updateCache())  
-        t.start() 
-        
+        t = threading.Thread(target=menu.updateCache())
+        t.start()
+
 
     def getMenu(self, Category = "All"):
        root = etree.parse(self.appsmenu)
@@ -45,7 +45,7 @@ class OBMenu:
            for item in root.xpath("/openbox_pipe_menu/menu[@id='"+Category+"']/item"):
                print etree.tostring(item, pretty_print=True, encoding='UTF-8')
            print '</openbox_pipe_menu>\n'
-           
+
 #main
 menu = OBMenu()
 if len(sys.argv) > 2:
