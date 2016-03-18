@@ -41,16 +41,18 @@ class OBMenu:
         t.start()
 
     def getMenu(self, Category="All"):
-       root = etree.parse(self.appsmenu)
-       if Category == "All":
-           print(etree.tostring(root, pretty_print=True, encoding='UTF-8'))
-       else:
-           print('<?xml version="1.0" encoding="UTF-8"?>\n')
-           print('<openbox_pipe_menu>\n')
-           xpath = "/openbox_pipe_menu/menu[@id='" + Category + "']/item"
-           for item in root.xpath(xpath):
-               print(etree.tostring(item, pretty_print=True, encoding='UTF-8'))
-           print('</openbox_pipe_menu>\n')
+        root = etree.parse(self.appsmenu)
+        if Category == "All":
+            print(etree.tostring(root, pretty_print=True, encoding='UTF-8'))
+        else:
+            print('<?xml version="1.0" encoding="UTF-8"?>\n')
+            print('<openbox_pipe_menu>\n')
+            xpath = "/openbox_pipe_menu/menu[@id='" + Category + "']/item"
+            for item in root.xpath(xpath):
+                print(etree.tostring(item,
+                                     pretty_print=True,
+                                     encoding='UTF-8'))
+            print('</openbox_pipe_menu>\n')
 
 # main
 menu = OBMenu()
