@@ -9,7 +9,7 @@ from xml.sax.saxutils import escape
 try:
    import gmenu
 except:
-    print "gmenu missing, please install pyhton-gmenu "
+    print("gmenu missing, please install pyhton-gmenu")
 
 
 MENU_CACHE_FILE = "xdg-menu-cache.xml"
@@ -41,7 +41,7 @@ class MenuCache:
               menu = self.xdg_menu  + '.menu'
        ## xdg-menu
        if not os.path.exists('/etc/xdg/menus/' + menu):
-          print '/etc/xdg/menus/'+menu + ' Not found!'
+          print('/etc/xdg/menus/'+menu + ' Not found!')
 
        # write menu cache
        self.createFile(self.file_path)
@@ -51,7 +51,7 @@ class MenuCache:
        try:
            map(self.walk_menu, gmenu.lookup_tree(menu).root.get_contents())
        except:
-           print "ocurrio un problema"
+           print("ocurrio un problema")
        self.file.write('</'+ self.tag + '>\n')
        self.file.close()
 
