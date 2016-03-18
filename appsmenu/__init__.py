@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # based in archbang script
-import re, sys, os
+import os
+import re
+import sys
+
 from xml.sax.saxutils import escape
 
 try:
