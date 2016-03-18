@@ -7,9 +7,11 @@
 #    HOW TO USE:
 #    Edit your openbox menu.xml
 #    Add a new pipe menu just adding this line:
-#       <menu execute="~/.scripts/mylaunchpad-master/ob_pipe_menu.py default All" id="pipe-menu" label="Applications Menu"/>
+#       <menu execute="~/.scripts/mylaunchpad-master/ob_pipe_menu.py \
+#               default All" id="pipe-menu" label="Applications Menu"/>
 #
-#    *You can change the default menu with your favorite xdg-menu like xfce-applications or lxde-aplications
+#    *You can change the default menu with your favorite xdg-menu like
+#           xfce-applications or lxde-aplications
 #    *You can change All with the ID of a specific category
 
 
@@ -27,7 +29,10 @@ class OBMenu:
     def __init__(self):
 
         # Get Menu
-        menu = MenuCache(AUTO_UPDATE=False, tag="openbox_pipe_menu", cache_dir = "openbox",  file_name = "openbox-xdg-menu-cache.xml")
+        menu = MenuCache(AUTO_UPDATE=False,
+                         tag="openbox_pipe_menu",
+                         cache_dir="openbox",
+                         file_name="openbox-xdg-menu-cache.xml")
         self.appsmenu = menu.getMenu()
 
         #update cache in the background
