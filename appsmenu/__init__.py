@@ -30,7 +30,7 @@ class MenuCache:
         self.xdg_menu = xdg_menu
 
         self.file_path = self.cache_dir_path + '/' + file_name
-        if not os.path.exists(self.file_path) or AUTO_UPDATE == True:
+        if not os.path.exists(self.file_path) or AUTO_UPDATE is True:
             self.updateCache()
 
     def updateCache(self):
