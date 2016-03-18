@@ -17,7 +17,12 @@ CACHE_DIR = "mylaunchpad"
 
 
 class MenuCache:
-    def __init__(self, tag='xdg-menu', AUTO_UPDATE=True, cache_dir=CACHE_DIR,  file_name=MENU_CACHE_FILE, xdg_menu='default'):
+    def __init__(self,
+                 tag='xdg-menu',
+                 AUTO_UPDATE=True,
+                 cache_dir=CACHE_DIR,
+                 file_name=MENU_CACHE_FILE,
+                 xdg_menu='default'):
         self.tag = tag
         home_path = os.path.realpath(os.path.expanduser('~'))
         self.cache_dir_path = home_path + '/' + ".cache/" + cache_dir
@@ -61,19 +66,25 @@ class MenuCache:
 
     def walk_menu(self, entry):
         if entry.get_type() == gmenu.TYPE_DIRECTORY:
-            self.file.write('<menu id="%s" label="%s" icon="%s">\n' \
-                % (escape(entry.menu_id), escape(entry.get_name()), escape(entry.get_icon())))
+            self.file.write('<menu id="%s" label="%s" icon="%s">\n' %
+                            (escape(entry.menu_id),
+                             escape(entry.get_name()),
+                             escape(entry.get_icon())))
             map(self.walk_menu, entry.get_contents())
             self.file.write('</menu>\n')
         elif entry.get_type() == gmenu.TYPE_ENTRY and not entry.is_excluded:
             try:
-                self.file.write('<item label="%s" icon="%s">\n' % (escape(entry.get_name()), escape(entry.get_icon())))
-                command = re.sub(' [^ ]*%[fFuUdDnNickvm]', '', entry.get_exec())
+                self.file.write('<item label="%s" icon="%s">\n' %
+                                (escape(entry.get_name()),
+                                 escape(entry.get_icon())))
+                command = re.sub(' [^ ]*%[fFuUdDnNickvm]', '',
+                                 entry.get_exec())
                 if entry.launch_in_terminal:
                     command = 'xterm -title "%s" -e %s' % \
                         (entry.get_name(), command)
-                self.file.write('<action name="Execute">\n' + \
-                    '<command>%s</command></action>\n' % escape(command))
+                self.file.write('<action name="Execute">\n' +
+                                '<command>%s</command></action>\n' %
+                                escape(command))
                 self.file.write('</item>\n')
             except:
                 pass
