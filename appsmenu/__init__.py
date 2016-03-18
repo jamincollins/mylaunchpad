@@ -1,5 +1,5 @@
-#based in archbang script
 #!/usr/bin/env python
+# based in archbang script
 import re, sys, os
 from xml.sax.saxutils import escape
 
