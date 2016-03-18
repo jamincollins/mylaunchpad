@@ -18,7 +18,7 @@ class MenuCache:
        self.tag = tag
        home_path = os.path.realpath(os.path.expanduser('~'))
        self.cache_dir_path = home_path + '/' + ".cache/" + cache_dir
-       
+
        self.xdg_menu = xdg_menu
 
        self.file_path = self.cache_dir_path + '/' + file_name
