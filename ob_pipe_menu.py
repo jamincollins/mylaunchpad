@@ -22,7 +22,7 @@ from appsmenu import MenuCache
 try:
     from lxml import etree
 except:
-    print "lxml missing, please install pyhton-lxml "
+    print("lxml missing, please install pyhton-lxml")
 
 
 class OBMenu:
@@ -43,13 +43,13 @@ class OBMenu:
     def getMenu(self, Category = "All"):
        root = etree.parse(self.appsmenu)
        if Category == "All":
-           print etree.tostring(root, pretty_print=True, encoding='UTF-8')
+           print(etree.tostring(root, pretty_print=True, encoding='UTF-8'))
        else:
-           print '<?xml version="1.0" encoding="UTF-8"?>\n'
-           print '<openbox_pipe_menu>\n'
+           print('<?xml version="1.0" encoding="UTF-8"?>\n')
+           print('<openbox_pipe_menu>\n')
            for item in root.xpath("/openbox_pipe_menu/menu[@id='"+Category+"']/item"):
-               print etree.tostring(item, pretty_print=True, encoding='UTF-8')
-           print '</openbox_pipe_menu>\n'
+               print(etree.tostring(item, pretty_print=True, encoding='UTF-8'))
+           print('</openbox_pipe_menu>\n')
 
 #main
 menu = OBMenu()
