@@ -15,8 +15,9 @@
 #    *You can change All with the ID of a specific category
 
 
-import os, sys
+import sys
 import threading
+
 from appsmenu import MenuCache
 
 try:
