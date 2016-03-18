@@ -44,7 +44,7 @@ class MenuCache:
                 menu = 'applications.menu'
             else:
                 menu = self.xdg_menu + '.menu'
-        ## xdg-menu
+        # xdg-menu
         if not os.path.exists('/etc/xdg/menus/' + menu):
             print('/etc/xdg/menus/'+menu + ' Not found!')
 
@@ -61,7 +61,7 @@ class MenuCache:
         self.file.close()
 
     def getMenu(self):
-        #print self.file_path
+        # print self.file_path
         return self.file_path
 
     def walk_menu(self, entry):
