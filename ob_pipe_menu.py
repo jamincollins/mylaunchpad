@@ -40,7 +40,6 @@ class OBMenu:
         t = threading.Thread(target=menu.updateCache())
         t.start()
 
-
     def getMenu(self, Category = "All"):
        root = etree.parse(self.appsmenu)
        if Category == "All":
