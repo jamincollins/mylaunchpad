@@ -9,7 +9,7 @@ pkgname=mylaunchpad-git
 _pkgname_simple=mylaunchpad
 pkgdesc="Eyecandy Full Screen launcher script for openbox and other stand-alone window managers"
 pkgrel=1
-pkgver=r78.57d57f5
+pkgver=r99.eb63698
 
 pkgver() {
    cd "$srcdir/$_pkgname_simple"
