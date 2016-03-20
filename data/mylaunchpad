@@ -82,13 +82,13 @@ except:
     sys.exit()
 
 
-def read_item_config (conf_parser, section, option, default = ""):
+def read_item_config (conf_parser, section, option, default=""):
     if conf_parser.has_section(section):
         if conf_parser.has_option(section, option):
             return conf_parser.get(section, option)
     return default
 
-def read_bool_item_config (conf_parser, section, option, default = False):
+def read_bool_item_config (conf_parser, section, option, default=False):
     if conf_parser.has_section(section):
         if conf_parser.has_option(section, option):
             return conf_parser.getboolean(section, option)
@@ -183,7 +183,7 @@ class AppStore:
         self.window.set_modal(True)
 
         # Get Menu
-        menu = MenuCache(AUTO_UPDATE=False, xdg_menu = launcher.xdg_menu)
+        menu = MenuCache(AUTO_UPDATE=False, xdg_menu=launcher.xdg_menu)
         self.appsmenu = menu.getMenu()
 
         # update cache in the background
@@ -403,7 +403,7 @@ class AppStore:
         return maxrows
 
     # Get icon
-    def get_icon(self, icon_name, size = ICON_SIZE):
+    def get_icon(self, icon_name, size=ICON_SIZE):
         try:
            theme = gtk.icon_theme_get_default()
            pixbuf = theme.load_icon(icon_name.split('.')[0],size, 0)
@@ -706,13 +706,13 @@ class MyLauncher:
         self.bgcolor = gtk.gdk.color_parse("black")
         self.init_window()
 
-    def read_item_config (self, section, option, default = ""):
+    def read_item_config (self, section, option, default=""):
         if self.config.has_section(section):
             if self.config.has_option(section, option):
                 return self.config.get(section, option)
         return default
 
-    def read_bool_item_config (self, section, option, default = False):
+    def read_bool_item_config (self, section, option, default=False):
         if self.config.has_section(section):
             if self.config.has_option(section, option):
                 return self.config.getboolean(section, option)
