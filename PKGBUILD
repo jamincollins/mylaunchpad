@@ -19,7 +19,7 @@ pkgver() {
 arch=('any')
 url="https://github.com/jamincollins/mylaunchpad"
 license=('GPL')
-depends=('python2' 'python2-lxml' 'pygtk' 'cairo' 'python2-cairo' 'python2-imaging' 'gnome-menus2')
+depends=('python' 'python-lxml' 'pygtk' 'cairo' 'python-cairo' 'python-imaging' 'gnome-menus')
 makedepends=('git')
 optdepends=()
 provides=('mylaunchpad')
@@ -33,5 +33,5 @@ package() {
     if [ "$category_icons" = true ]; then
         git checkout category-icons
     fi
-    python2 setup.py install --root ${pkgdir}
+    python setup.py install --root ${pkgdir}
 }
