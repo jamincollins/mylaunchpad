@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 
-import os, sys
-import pygtk
-import logging
-import re
-import threading
-import signal
 import ConfigParser
-import locale
 import gettext
+import locale
+import logging
+import os
+import pygtk
+import re
+import signal
+import sys
+import threading
+
 from appsmenu import MenuCache
 from subprocess import call
 pygtk.require('2.0')
