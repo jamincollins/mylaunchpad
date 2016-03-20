@@ -61,24 +61,24 @@ INTERNAL_MENU_SUSPEND_COMMAND = ""
 try:
     from lxml import etree
 except:
-    print "lxml missing, please install pyhton-lxml "
+    print("lxml missing, please install pyhton-lxml")
     sys.exit()
 
 try:
     import gtk
 except:
-    print "pyGTK missing, install python-gtk2"
+    print("pyGTK missing, install python-gtk2")
     sys.exit()
 
 try:
     import cairo
 except:
-    print "Cairo modules missing, install python-cairo"
+    print("Cairo modules missing, install python-cairo")
 
 try:
     from PIL import Image, ImageFilter
 except:
-    print "PIL missing, install python-imaging"
+    print("PIL missing, install python-imaging")
     sys.exit()
 
 
@@ -110,17 +110,17 @@ def import_favor():
     if os.path.isfile(home_dir+"/.mylaunchpad/favor"):
         favors = open(home_dir+"/.mylaunchpad/favor", "r")
         favorite = eval(favors.readline())
-        print "Favorites imported: ", favorite
+        print("Favorites imported: ", favorite)
     else:
         favorite = set()
         export_favor()
-        print "Favorites imported as empty"
+        print("Favorites imported as empty")
 
 def export_favor():
     favors = open(home_dir+"/.mylaunchpad/favor", "w")
     favors.write(str(favorite) + "\n")
     favors.close()
-    print "Favorites exported"
+    print("Favorites exported")
 
 def import_hidden():
     global hidden
@@ -129,17 +129,17 @@ def import_hidden():
     if os.path.isfile(home_dir+"/.mylaunchpad/hidden"):
         hiddens = open(home_dir+"/.mylaunchpad/hidden", "r")
         hidden = eval(hiddens.readline())
-        print "Hidden imported: ", hidden
+        print("Hidden imported: ", hidden)
     else:
         hidden = set()
         export_hidden()
-        print "Hidden imported as empty"
+        print("Hidden imported as empty")
 
 def export_hidden():
     hiddens = open(home_dir+"/.mylaunchpad/hidden", "w")
     hiddens.write(str(hidden) + "\n")
     hiddens.close()
-    print "Hidden exported"
+    print("Hidden exported")
 
 def import_conf():
     mlp_config = ConfigParser.RawConfigParser()
@@ -307,7 +307,7 @@ class AppStore:
             # self.buttonsContainer.get_children()[0].get_children()[0].get_children()[0].grab_focus()
             self.buttonsContainer.get_children()[0].get_children()[0].get_children()[0].set_relief(gtk.RELIEF_NORMAL)
           except:
-            print "No result"
+            print("No result")
        self.navigate_page(None, None, self.apps, 1)
 
     def add_toolbar(self, widget, categories, launcher):
@@ -562,7 +562,7 @@ class AppStore:
 
     def run_command(self, command):
          self.destroy()
-         print "%s pressed" %command
+         print("%s pressed" %command)
          os.system(command + ' &')
 
     def hide_app(self, item):
@@ -626,7 +626,7 @@ class AppStore:
                 menu.append(item)
                 item.connect_object("activate", self.run_command, launcher.logout_cmd)
                 continue
-            print "->Error! Wrong command option: " + cmd + " in the config file\n"
+            print("->Error! Wrong command option: " + cmd + " in the config file\n")
 
         menu.show_all()
         gtk.Menu.popup(menu, None, None, None, 1, 0)
@@ -799,7 +799,7 @@ class MyLauncher:
             self.window.connect('screen-changed', self.on_screen_changed)
             self.on_screen_changed(self.window)
             self.rendered_effects = False
-        print "Compositing %s" %self.window.is_composited()
+        print("Compositing %s" %self.window.is_composited())
 
         self.window.set_size_request(620,200)
         self.window.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
