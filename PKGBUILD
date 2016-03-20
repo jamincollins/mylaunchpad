@@ -17,7 +17,7 @@ pkgver() {
 }
 
 arch=('any')
-url="https://github.com/gaboelnuevo/mylaunchpad"
+url="https://github.com/jamincollins/mylaunchpad"
 license=('GPL')
 depends=('python2' 'python2-lxml' 'pygtk' 'cairo' 'python2-cairo' 'python2-imaging' 'gnome-menus2')
 makedepends=('git')
@@ -26,7 +26,7 @@ provides=('mylaunchpad')
 md5sums=('SKIP')
 backup=('etc/mylaunchpad.conf')
 
-source=('mylaunchpad::git+http://github.com/gaboelnuevo/mylaunchpad')
+source=('mylaunchpad::git+https://github.com/jamincollins/mylaunchpad.git')
 
 package() {
     cd "$srcdir/$_pkgname_simple"
