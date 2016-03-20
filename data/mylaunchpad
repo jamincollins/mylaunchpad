@@ -47,11 +47,11 @@ CONTAINER_PADDING = 10
 OPACITY = 90
 
 
-#default configuration
+# default configuration
 POWER_BUTTON = True
 GOOGLE_SEARCH = True
 
-#default commands
+# default commands
 INTERNAL_MENU_SHUTDOWN_COMMAND = "sudo shutdown -h now"
 INTERNAL_MENU_REBOOT_COMMAND   = "sudo reboot"
 INTERNAL_MENU_LOCK_COMMAND = ""
@@ -186,7 +186,7 @@ class AppStore:
         menu = MenuCache(AUTO_UPDATE=False, xdg_menu = launcher.xdg_menu)
         self.appsmenu = menu.getMenu()
 
-        #update cache in the background
+        # update cache in the background
         t = threading.Thread(target=menu.updateCache())
         t.start()
 
@@ -210,10 +210,10 @@ class AppStore:
         self.mainContainer.pack_start(self.buttonsContainer, False, True, 0)
         self.mainContainer.pack_start(gtk.HBox(), True, True)
 
-        #add toolbar
+        # add toolbar
         self.add_toolbar(mainbox, categories, launcher)
 
-        #add main container to main box
+        # add main container to main box
         mainbox.pack_start(self.mainContainer)
 
         self.load("ALL")
@@ -265,7 +265,7 @@ class AppStore:
            self.buttonsContainer.set_size_request(self.buttonContainer_size_w, self.buttonContainer_size_h)
         self.fill_buttonsContainer(results)
         self.buttonsContainer.show_all()
-    #load apps
+    # load apps
     def load(self, id_category):
         self.buttonContainer_size_w = self.buttonsContainer.get_allocation().width
         self.buttonContainer_size_h = self.buttonsContainer.get_allocation().height
@@ -304,7 +304,7 @@ class AppStore:
           else:
               self.load("ALL")
           try:
-            #self.buttonsContainer.get_children()[0].get_children()[0].get_children()[0].grab_focus()
+            # self.buttonsContainer.get_children()[0].get_children()[0].get_children()[0].grab_focus()
             self.buttonsContainer.get_children()[0].get_children()[0].get_children()[0].set_relief(gtk.RELIEF_NORMAL)
           except:
             print "No result"
@@ -352,7 +352,7 @@ class AppStore:
            button.connect("clicked", self.activate_category, category['id'])
            toolbar.pack_start(button, False, False, 0)
 
-        #shutdown button
+        # shutdown button
 
         if launcher.power_button:
            self.btnshutdown = gtk.Button()
@@ -370,11 +370,11 @@ class AppStore:
         # Add search box
         self.search = gtk.Entry()
         self.search.set_editable(False)
-        #self.search.set_property('can-focus', False)
+        # self.search.set_property('can-focus', False)
         self.search.set_text("Start typing...")
         self.search.connect("activate", self.enter_callback)
         self.search.connect("focus-out-event", self.search_lost_focus)
-        #self.search.connect("focus-in-event", self.enable_search)
+        # self.search.connect("focus-in-event", self.enable_search)
 
         toolbar.pack_end(gtk.HBox())
         toolbar.pack_end(self.search, False, False, 5)
@@ -392,12 +392,12 @@ class AppStore:
         gtk.main_quit()
         return False
 
-    #Calculate max columns
+    # Calculate max columns
     def calculate_maxcolums(self):
        maxcolums = (gtk.gdk.screen_width() / (ICON_SIZE + COL_PADDING*2 + BUTTON_PADDING*2+CONTAINER_PADDING*2))
        return maxcolums
 
-    #Calculate max row
+    # Calculate max row
     def calculate_maxrows(self):
         maxrows = (gtk.gdk.screen_height() / (ICON_SIZE*2 + ROW_PADDING*2 + BUTTON_PADDING*2))
         return maxrows
@@ -416,7 +416,7 @@ class AppStore:
 
     def paginate(self, lista):
         nPages = (len(lista) / (self.maxcolums * self.maxrows)) + 1
-        #print "pages: " + str(nPages)
+        # print "pages: " + str(nPages)
         paginationbox = gtk.HBox()
         footer = gtk.HBox()
         self.apps = lista
@@ -440,7 +440,7 @@ class AppStore:
                 button.add(label)
                 label.show()
                 paginationbox.pack_start(button, False , False, 0)
-            #paginationbox.pack_start(gtk.Label("            Page: " + str(self.cur_page)), False, False, 5)
+            # paginationbox.pack_start(gtk.Label("            Page: " + str(self.cur_page)), False, False, 5)
         footer.pack_start(gtk.HBox())
         footer.pack_start(paginationbox, False , False, 0)
         footer.pack_start(gtk.HBox())
@@ -449,7 +449,7 @@ class AppStore:
     def fill_buttonsContainer(self, lista, Page=1):
         self.paginate(lista)
 
-        #row_widget = self.new_row(self.buttonsContainer)
+        # row_widget = self.new_row(self.buttonsContainer)
         iconCounter=0
         rowCounter=0
         i = {
@@ -481,9 +481,9 @@ class AppStore:
             image = gtk.Image()
             button = gtk.Button()
             button.set_relief(gtk.RELIEF_NONE)
-            #gtk.RELIEF_NORMAL
-            #button.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))
-            #button.set_property('opacity', 0.3)
+            # gtk.RELIEF_NORMAL
+            # button.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))
+            # button.set_property('opacity', 0.3)
             button.set_focus_on_click(False)
             button.set_border_width(0)
             button.set_property('can-focus', True)
@@ -497,7 +497,7 @@ class AppStore:
             button.connect("focus-in-event", self.in_focus)
             button.connect("focus-out-event", self.out_focus)
             labelString = item['label']
-            ## label to big
+            # label to big
             if len(item['label']) > 15:
                 if len(item['command']) < 15:
                    labelString = item['command'].replace('-', ' ').capitalize()
@@ -508,8 +508,8 @@ class AppStore:
             label.set_tooltip_text(item['label'])
             button.set_tooltip_text(item['label'])
             label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))
-            #if len(labelString) > 12:
-               #label.set_line_wrap(True)
+            # if len(labelString) > 12:
+               # label.set_line_wrap(True)
             label.set_justify(gtk.JUSTIFY_CENTER)
 
             box.set_size_request(ICON_SIZE+BUTTON_PADDING*2, ICON_SIZE*2)
@@ -639,8 +639,8 @@ class AppStore:
         return False
 
 
-     ## xpath tutorial:
-     ## http://www.w3schools.com/xpath/xpath_syntax.asp
+     # xpath tutorial:
+     # http://www.w3schools.com/xpath/xpath_syntax.asp
 
     def getApps(self, Category="ALL", Page=1):
        root = etree.parse(self.appsmenu)
@@ -681,7 +681,7 @@ class MyLauncher:
         # Start logger
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        #read config
+        # read config
         self.config = ConfigParser.RawConfigParser()
         if os.path.isfile(home_dir+"/.mylaunchpad/conf"):
             self.config.read(home_dir+"/.mylaunchpad/conf")
@@ -725,7 +725,7 @@ class MyLauncher:
         gtk.main_quit()
 
     def on_keypress(self, widget=None, event=None, data=None):
-        #print("Keypress: %s/%s" % (event.keyval, gtk.gdk.keyval_name(event.keyval)))
+        # print("Keypress: %s/%s" % (event.keyval, gtk.gdk.keyval_name(event.keyval)))
         if gtk.gdk.keyval_name(event.keyval) == "Escape":
             self.quit()
 
@@ -764,7 +764,7 @@ class MyLauncher:
         cr.set_operator(cairo.OPERATOR_SOURCE)
         cr.paint()
 
-        #(width, height) = widget.get_size()
+        # (width, height) = widget.get_size()
         cr.set_source_rgba(self.bgcolor.red, self.bgcolor.green, self.bgcolor.blue, float(self.opacity)/100)
 
         cr.rectangle(event.area.x, event.area.y, event.area.width, event.area.height)
@@ -775,7 +775,7 @@ class MyLauncher:
         return False
 
     def init_window(self):
-         # Start pyGTK setup
+        # Start pyGTK setup
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.window.set_title("MyLaunchpad")
         self.window.set_keep_above(True)
@@ -794,7 +794,7 @@ class MyLauncher:
             self.rendered_effects = True
         else:
             # Link in Cairo rendering events
-            #self.window.connect("delete_event", self.delete_event)
+            # self.window.connect("delete_event", self.delete_event)
             self.window.connect('expose-event', self.on_expose)
             self.window.connect('screen-changed', self.on_screen_changed)
             self.on_screen_changed(self.window)
@@ -852,7 +852,7 @@ class MyLauncher:
 
 
     def run_launcher(self):
-        #gtk.rc_parse('rc')
+        # gtk.rc_parse('rc')
         self.window.show_all()
 
         gtk.main()
