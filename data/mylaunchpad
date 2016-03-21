@@ -97,12 +97,12 @@ def read_bool_item_config (conf_parser, section, option, default=False):
 
 def html_escape(text):
     html_escape_table = {
-    "&": "&amp;",
-    '"': "&quot;",
-    "'": "&apos;",
-    ">": "&gt;",
-    "<": "&lt;",
-    }
+        "&": "&amp;",
+        '"': "&quot;",
+        "'": "&apos;",
+        ">": "&gt;",
+        "<": "&lt;",
+        }
     return "".join(html_escape_table.get(c,c) for c in text)
 
 def import_favor():
