@@ -870,7 +870,7 @@ class MyLauncher:
         # colormap
         screen = widget.get_screen()
         self.colormap = screen.get_rgba_colormap()
-        if self.colormap == None:
+        if self.colormap is None:
             self.logger.debug("Screen does not support alpha channels!")
             colormap = screen.get_rgb_colormap()
             self.supports_alpha = False
@@ -885,7 +885,7 @@ class MyLauncher:
 
         cr = widget.window.cairo_create()
 
-        if self.supports_alpha == True:
+        if self.supports_alpha:
             cr.set_source_rgba(1.0, 1.0, 1.0, 0.0)  # Transparent
         else:
             cr.set_source_rgb(1.0, 1.0, 1.0)  # Opaque white
@@ -945,7 +945,7 @@ class MyLauncher:
 
         apps = AppStore(mainbox, self)
 
-        if self.rendered_effects == True:
+        if self.rendered_effects:
             self.logger.debug("Stepping though render path")
             w = gtk.gdk.get_default_root_window()
             sz = w.get_size()
