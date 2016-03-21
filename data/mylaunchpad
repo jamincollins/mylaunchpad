@@ -53,7 +53,7 @@ GOOGLE_SEARCH = True
 
 # default commands
 INTERNAL_MENU_SHUTDOWN_COMMAND = "sudo shutdown -h now"
-INTERNAL_MENU_REBOOT_COMMAND   = "sudo reboot"
+INTERNAL_MENU_REBOOT_COMMAND = "sudo reboot"
 INTERNAL_MENU_LOCK_COMMAND = ""
 INTERNAL_MENU_LOGOUT_COMMAND = ""
 INTERNAL_MENU_SUSPEND_COMMAND = ""
@@ -82,14 +82,14 @@ except:
     sys.exit()
 
 
-def read_item_config (conf_parser, section, option, default=""):
+def read_item_config(conf_parser, section, option, default=""):
     if conf_parser.has_section(section):
         if conf_parser.has_option(section, option):
             return conf_parser.get(section, option)
     return default
 
 
-def read_bool_item_config (conf_parser, section, option, default=False):
+def read_bool_item_config(conf_parser, section, option, default=False):
     if conf_parser.has_section(section):
         if conf_parser.has_option(section, option):
             return conf_parser.getboolean(section, option)
@@ -104,7 +104,7 @@ def html_escape(text):
         ">": "&gt;",
         "<": "&lt;",
         }
-    return "".join(html_escape_table.get(c,c) for c in text)
+    return "".join(html_escape_table.get(c, c) for c in text)
 
 
 def import_favor():
@@ -247,7 +247,7 @@ class AppStore:
         self.search.set_editable(False)
         self.window.set_focus(None)
         self.window.add(mainbox)
-        self.window.maximize() # HOT FIX
+        self.window.maximize()  # HOT FIX
 
     def on_keypress(self, widget, event):
         if gtk.gdk.keyval_name(event.keyval) == "Page_Down":
@@ -280,7 +280,8 @@ class AppStore:
         elif ((self.search.get_text() in ["", "Start typing..."] or
                not self.search.get_editable()) and
               gtk.gdk.keyval_name(event.keyval) not in
-                ["Left", "Right", "Up","Down", "Page_Up", "Page_Down", "Tab"]):
+                ["Left", "Right", "Up", "Down", "Page_Up", "Page_Down", "Tab"]
+              ):
             self.window.set_focus(self.search)
         return
 
@@ -338,11 +339,17 @@ class AppStore:
 
     def activate_search(self, widget=None, event=None, data=None):
         if gtk.gdk.keyval_name(event.keyval) in \
-                ["Page_Down", "Page_Up","Left","Right","Up", "Down",  "Tab"]:
+                ["Page_Down",
+                 "Page_Up",
+                 "Left",
+                 "Right",
+                 "Up",
+                 "Down",
+                 "Tab"]:
             return
         else:
             if self.search.get_text() and \
-                    self.search.get_text() !=  "Start typing...":
+                    self.search.get_text() != "Start typing...":
                 self.showResults(self.getResults(self.search.get_text()))
             else:
                 self.load("ALL")
@@ -363,11 +370,11 @@ class AppStore:
         self.toolbar = toolbar
         toolbar.set_border_width(5)
 
-        toolbar_container.pack_start(gtk.HBox()) #
+        toolbar_container.pack_start(gtk.HBox())
 
         toolbar.pack_start(gtk.HBox())
         # Add Categories as buttons
-        button = gtk.Button( _(" All "))
+        button = gtk.Button(_(" All "))
         button.category_id = "ALL"
         button.set_relief(gtk.RELIEF_NORMAL)
         button.child.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
@@ -402,11 +409,11 @@ class AppStore:
 
         if launcher.power_button:
             self.btnshutdown = gtk.Button()
-            self.btnshutdown.add(self.get_icon("system-shutdown-symbolic",24))
+            self.btnshutdown.add(self.get_icon("system-shutdown-symbolic", 24))
             self.btnshutdown.set_relief(gtk.RELIEF_NONE)
             self.btnshutdown.set_property('can-focus', False)
             if not launcher.custom_power_manager or \
-                    launcher.custom_power_manager == 'none' :
+                    launcher.custom_power_manager == 'none':
                 self.btnshutdown.connect("clicked", self.get_shutdown_menu)
             else:
                 self.btnshutdown.connect_object("clicked",
@@ -429,11 +436,11 @@ class AppStore:
 
         # Add toolbar to widget
 
-        toolbar_container.pack_start(toolbar, False , False, 0)
+        toolbar_container.pack_start(toolbar, False, False, 0)
         toolbar.pack_start(gtk.HBox())
 
-        toolbar_container.pack_start(gtk.HBox()) #
-        widget.pack_start(toolbar_container, False , False, 30)
+        toolbar_container.pack_start(gtk.HBox())
+        widget.pack_start(toolbar_container, False, False, 30)
 
     # closing the window from the WM
     def destroy(self, widget=None, event=None):
@@ -457,13 +464,13 @@ class AppStore:
     def get_icon(self, icon_name, size=ICON_SIZE):
         try:
             theme = gtk.icon_theme_get_default()
-            pixbuf = theme.load_icon(icon_name.split('.')[0],size, 0)
+            pixbuf = theme.load_icon(icon_name.split('.')[0], size, 0)
             return gtk.image_new_from_pixbuf(pixbuf)
         except:
             if not icon_name or not os.path.exists(icon_name):
-                pixbuf = theme.load_icon("exec",size, 0)
+                pixbuf = theme.load_icon("exec", size, 0)
                 return gtk.image_new_from_pixbuf(pixbuf)
-            return gtk.image_new_from_file (icon_name)
+            return gtk.image_new_from_file(icon_name)
 
     def paginate(self, lista):
         nPages = (len(lista) / (self.maxcolums * self.maxrows)) + 1
@@ -473,7 +480,7 @@ class AppStore:
         self.apps = lista
         self.max_pages = nPages
         if nPages > 1:
-            for i in range(1,nPages+1):
+            for i in range(1, nPages+1):
                 button = gtk.Button()
                 button.set_relief(gtk.RELIEF_NORMAL)
                 if self.cur_page == i:
@@ -498,20 +505,20 @@ class AppStore:
                                  '</b></span>')
                 button.add(label)
                 label.show()
-                paginationbox.pack_start(button, False , False, 0)
+                paginationbox.pack_start(button, False, False, 0)
             # paginationbox.pack_start(gtk.Label("            Page: "
             #                          str(self.cur_page)), False, False, 5)
         footer.pack_start(gtk.HBox())
-        footer.pack_start(paginationbox, False , False, 0)
+        footer.pack_start(paginationbox, False, False, 0)
         footer.pack_start(gtk.HBox())
-        self.buttonsContainer.pack_end(footer, False , False, 0)
+        self.buttonsContainer.pack_end(footer, False, False, 0)
 
     def fill_buttonsContainer(self, lista, Page=1):
         self.paginate(lista)
 
         # row_widget = self.new_row(self.buttonsContainer)
-        iconCounter=0
-        rowCounter=0
+        iconCounter = 0
+        rowCounter = 0
         i = {
                 'icon': 'find-location-symbolic',
                 'command': ("python -c 'import webbrowser; "
@@ -527,14 +534,14 @@ class AppStore:
         begin = (self.maxrows*self.maxcolums)*(Page-1)
         end = (self.maxrows*self.maxcolums)*(Page)
         for item in lista[begin:end]+addition:
-            if (iconCounter)%self.maxcolums == 0:
-                rowCounter+=1
+            if (iconCounter) % self.maxcolums == 0:
+                rowCounter += 1
                 row_widget = self.new_row(self.buttonsContainer)
-            iconCounter+=1
+            iconCounter += 1
             self.add_button(item, row_widget)
 
     def new_row(self, widget):
-        row=gtk.HBox(False)
+        row = gtk.HBox(False)
         widget.pack_start(row, False, False, ROW_PADDING)
         return row
 
@@ -577,7 +584,7 @@ class AppStore:
             button.set_tooltip_text(item['label'])
             label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))
             # if len(labelString) > 12:
-                # label.set_line_wrap(True)
+            #     label.set_line_wrap(True)
             label.set_justify(gtk.JUSTIFY_CENTER)
 
             box.set_size_request(ICON_SIZE+BUTTON_PADDING*2, ICON_SIZE*2)
@@ -634,7 +641,7 @@ class AppStore:
 
     def run_command(self, command):
         self.destroy()
-        print("%s pressed" %command)
+        print("%s pressed" % command)
         os.system(command + ' &')
 
     def hide_app(self, item):
@@ -674,7 +681,7 @@ class AppStore:
 
         for cmd in launcher.config.get('options',
                                        'power_options'
-                                      ).replace(' ', '').split(','):
+                                       ).replace(' ', '').split(','):
             if cmd == "shutdown" and launcher.shutdown_cmd:
                 item = gtk.MenuItem(_("Shutdown"))
                 menu.append(item)
@@ -801,9 +808,9 @@ class MyLauncher:
             'options',
             'custom_power_manager',
             'none')
-        self.xdg_menu =  self.read_item_config('options',
-                                               'xdg-menu',
-                                               'default')
+        self.xdg_menu = self.read_item_config('options',
+                                              'xdg-menu',
+                                              'default')
 
         self.shutdown_cmd = self.read_item_config(
             'commands',
@@ -827,13 +834,13 @@ class MyLauncher:
         self.bgcolor = gtk.gdk.color_parse("black")
         self.init_window()
 
-    def read_item_config (self, section, option, default=""):
+    def read_item_config(self, section, option, default=""):
         if self.config.has_section(section):
             if self.config.has_option(section, option):
                 return self.config.get(section, option)
         return default
 
-    def read_bool_item_config (self, section, option, default=False):
+    def read_bool_item_config(self, section, option, default=False):
         if self.config.has_section(section):
             if self.config.has_option(section, option):
                 return self.config.getboolean(section, option)
@@ -879,9 +886,9 @@ class MyLauncher:
         cr = widget.window.cairo_create()
 
         if self.supports_alpha == True:
-            cr.set_source_rgba(1.0, 1.0, 1.0, 0.0) # Transparent
+            cr.set_source_rgba(1.0, 1.0, 1.0, 0.0)  # Transparent
         else:
-            cr.set_source_rgb(1.0, 1.0, 1.0) # Opaque white
+            cr.set_source_rgb(1.0, 1.0, 1.0)  # Opaque white
 
         # Draw the background
         cr.set_operator(cairo.OPERATOR_SOURCE)
@@ -926,9 +933,9 @@ class MyLauncher:
             self.window.connect('screen-changed', self.on_screen_changed)
             self.on_screen_changed(self.window)
             self.rendered_effects = False
-        print("Compositing %s" %self.window.is_composited())
+        print("Compositing %s" % self.window.is_composited())
 
-        self.window.set_size_request(620,200)
+        self.window.set_size_request(620, 200)
         self.window.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
 
         self.window.set_decorated(False)
@@ -942,15 +949,22 @@ class MyLauncher:
             self.logger.debug("Stepping though render path")
             w = gtk.gdk.get_default_root_window()
             sz = w.get_size()
-            pb = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB,False,8,sz[0],sz[1])
-            pb = pb.get_from_drawable(w,w.get_colormap(),0,0,0,0,sz[0],sz[1])
+            pb = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])
+            pb = pb.get_from_drawable(w,
+                                      w.get_colormap(),
+                                      0,
+                                      0,
+                                      0,
+                                      0,
+                                      sz[0],
+                                      sz[1])
 
             self.logger.debug("Rendering Fade")
             # Convert Pixbuf to PIL Image
-            wh = (pb.get_width(),pb.get_height())
+            wh = (pb.get_width(), pb.get_height())
             pilimg = Image.fromstring("RGB", wh, pb.get_pixels())
 
-            pilimg = pilimg.point(lambda p: (p * self.opacity) / 255 )
+            pilimg = pilimg.point(lambda p: (p * self.opacity) / 255)
 
             # "Convert" the PIL to Pixbuf via PixbufLoader
             buf = StringIO.StringIO()
@@ -975,7 +989,7 @@ class MyLauncher:
 
         if pixmap:
             self.window.window.set_back_pixmap(pixmap, False)
-        self.window.move(0,0)
+        self.window.move(0, 0)
 
     def run_launcher(self):
         # gtk.rc_parse('rc')
