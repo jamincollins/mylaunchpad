@@ -872,7 +872,7 @@ class MyLauncher:
         self.colormap = screen.get_rgba_colormap()
         if self.colormap is None:
             self.logger.debug("Screen does not support alpha channels!")
-            colormap = screen.get_rgb_colormap()
+            self.colormap = screen.get_rgb_colormap()
             self.supports_alpha = False
         else:
             self.logger.debug("Screen supports alpha channels!")
