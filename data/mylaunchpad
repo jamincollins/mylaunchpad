@@ -2,7 +2,7 @@
 
 import ConfigParser
 import gettext
-import locale
+# import locale
 import logging
 import os
 import pygtk
@@ -12,7 +12,7 @@ import sys
 import threading
 
 from appsmenu import MenuCache
-from subprocess import call
+# from subprocess import call
 pygtk.require('2.0')
 
 gettext.install('mylaunchpad', '%s/share/locale' % sys.prefix, unicode=1)
@@ -76,7 +76,7 @@ except:
     print("Cairo modules missing, install python-cairo")
 
 try:
-    from PIL import Image, ImageFilter
+    from PIL import Image  # , ImageFilter
 except:
     print("PIL missing, install python-imaging")
     sys.exit()
@@ -550,7 +550,7 @@ class AppStore:
         if item['label'] != 'MyLaunchpad':
             box = gtk.VBox(False)
 
-            image = gtk.Image()
+            # image = gtk.Image()
             button = gtk.Button()
             button.set_relief(gtk.RELIEF_NONE)
             # gtk.RELIEF_NORMAL
@@ -941,9 +941,9 @@ class MyLauncher:
         self.window.set_decorated(False)
         self.window.set_position(gtk.WIN_POS_CENTER)
 
-        mainbox = gtk.VBox(False, 0);
+        # mainbox = gtk.VBox(False, 0);
 
-        apps = AppStore(mainbox, self)
+        # apps = AppStore(mainbox, self)
 
         if self.rendered_effects:
             self.logger.debug("Stepping though render path")
