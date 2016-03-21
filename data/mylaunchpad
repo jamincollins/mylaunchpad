@@ -88,6 +88,7 @@ def read_item_config (conf_parser, section, option, default=""):
             return conf_parser.get(section, option)
     return default
 
+
 def read_bool_item_config (conf_parser, section, option, default=False):
     if conf_parser.has_section(section):
         if conf_parser.has_option(section, option):
@@ -105,6 +106,7 @@ def html_escape(text):
         }
     return "".join(html_escape_table.get(c,c) for c in text)
 
+
 def import_favor():
     global favorite
     if os.path.isfile(home_dir+"/.mylaunchpad/favor"):
@@ -116,11 +118,13 @@ def import_favor():
         export_favor()
         print("Favorites imported as empty")
 
+
 def export_favor():
     favors = open(home_dir+"/.mylaunchpad/favor", "w")
     favors.write(str(favorite) + "\n")
     favors.close()
     print("Favorites exported")
+
 
 def import_hidden():
     global hidden
@@ -135,11 +139,13 @@ def import_hidden():
         export_hidden()
         print("Hidden imported as empty")
 
+
 def export_hidden():
     hiddens = open(home_dir+"/.mylaunchpad/hidden", "w")
     hiddens.write(str(hidden) + "\n")
     hiddens.close()
     print("Hidden exported")
+
 
 def import_conf():
     mlp_config = ConfigParser.RawConfigParser()
@@ -179,13 +185,13 @@ def import_conf():
                                    '90'))
 
 
-
 favorite = set()
 hidden = set()
 
 import_hidden()
 import_favor()
 import_conf()
+
 
 class AppStore:
     def __init__(self, mainbox, launcher):
@@ -210,7 +216,6 @@ class AppStore:
 
         # Get Categories
         categories = self.getCategories()
-
 
         # Create containers
         self.mainContainer = gtk.HBox(False, 0)
@@ -294,6 +299,7 @@ class AppStore:
                                                    self.buttonContainer_size_h)
         self.fill_buttonsContainer(results)
         self.buttonsContainer.show_all()
+
     # load apps
     def load(self, id_category):
         self.buttonContainer_size_w = \
@@ -408,7 +414,6 @@ class AppStore:
                                                 launcher.custom_power_manager)
 
             toolbar.pack_end(self.btnshutdown)
-
 
         # Add search box
         self.search = gtk.Entry()
@@ -589,7 +594,6 @@ class AppStore:
     def in_focus(self, widget, event):
         widget.set_relief(gtk.RELIEF_NORMAL)
 
-
     def out_focus(self, widget, event):
         widget.set_relief(gtk.RELIEF_NONE)
 
@@ -715,13 +719,10 @@ class AppStore:
         menu.show_all()
         gtk.Menu.popup(menu, None, None, None, 1, 0)
 
-
-
     def isHiddenItem(self, label):
         if label in hidden:
             return True
         return False
-
 
     # xpath tutorial:
     # http://www.w3schools.com/xpath/xpath_syntax.asp
@@ -776,6 +777,7 @@ class AppStore:
                                 'command': item.find(".//command").text})
         return results
 
+
 class MyLauncher:
     def __init__(self):
         global GOOGLE_SEARCH
@@ -788,7 +790,6 @@ class MyLauncher:
             self.config.read(home_dir+"/.mylaunchpad/conf")
         else:
             self.config.read("/etc/mylaunchpad.conf")
-
 
         self.power_button = self.read_bool_item_config('options',
                                                        'power_button',
@@ -820,7 +821,6 @@ class MyLauncher:
         self.logout_cmd = self.read_item_config('commands',
                                                 'logout',
                                                 INTERNAL_MENU_LOGOUT_COMMAND)
-
 
         # bgcolor and opacity
         self.opacity = OPACITY
@@ -899,7 +899,6 @@ class MyLauncher:
                      event.area.height)
         cr.fill()
 
-
         cr.stroke()
         return False
 
@@ -910,13 +909,11 @@ class MyLauncher:
         self.window.set_keep_above(True)
         self.window.add_events(gtk.gdk.BUTTON_PRESS_MASK)
 
-
         self.window.connect("destroy", self.quit)
         self.window.connect("button-press-event", self.quit)
         self.window.connect("key-press-event", self.on_keypress)
         self.window.connect("window-state-event",
                             self.on_window_state_change)
-
 
         if not self.window.is_composited():
             self.logger.debug("No compositing, enabling rendered effects")
@@ -980,7 +977,6 @@ class MyLauncher:
             self.window.window.set_back_pixmap(pixmap, False)
         self.window.move(0,0)
 
-
     def run_launcher(self):
         # gtk.rc_parse('rc')
         self.window.show_all()
@@ -989,4 +985,3 @@ class MyLauncher:
 
 launcher = MyLauncher()
 launcher.run_launcher()
-
