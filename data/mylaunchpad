@@ -11,6 +11,11 @@ import signal
 import sys
 import threading
 
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 from appsmenu import MenuCache
 # from subprocess import call
 pygtk.require('2.0')
